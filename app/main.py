@@ -29,7 +29,7 @@ def create_task(title: str, description: str = None, db: Session = Depends(get_d
 
 @app.put("/tasks/{task_id}")
 def update_task(task_id: int, title: str = None, description: str = None, completed: bool = None, db: Session = Depends(get_db)):
-    task = crud.get_task(db, task_id=task_id)
+    task = crud.update_task(db, task_id=task_id, title=title, description=description, completed=completed)
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
